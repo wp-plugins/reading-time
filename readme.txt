@@ -4,7 +4,7 @@ Donate link: http://www.whiletrue.it/
 Tags: reading time, estimate time, reading, time, word count
 Requires at least: 2.9+
 Tested up to: 3.0
-Stable tag: 1.0
+Stable tag: 1.0.0
 
 Reading Time shows the estimated reading time and puts an animated progress bar inside the post. 
 

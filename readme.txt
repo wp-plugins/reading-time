@@ -35,11 +35,11 @@ The value for speed should be chosen between a span of 150 words per minute (sli
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 Initial version
 
 
 == Upgrade Notice == 
 
-= 1.0 =
+= 1.0.0 =
 Initial version

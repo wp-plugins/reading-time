@@ -15,7 +15,7 @@ The calculation is automatic; a different value (in seconds) for a single post c
 == Installation ==
 1. Upload `reading_time.php` to the `/wp-content/plugins/` directory
 2. Set your favourite values in the `Settings->Reading Time` menu in Wordpress
-3. Activate the plugin through the 'Plugins' menu in WordPress
+3. Activate the plugin through the `Plugins` menu in WordPress
 4. Enjoy!
 
 == Frequently Asked Questions ==

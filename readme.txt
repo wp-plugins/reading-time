@@ -10,7 +10,7 @@ Reading Time shows the estimated reading time and puts an animated progress bar 
 
 == Description ==
 Reading Time shows the estimated reading time of the post. 
-The calculation is automatic; a different value (in seconds) for a single post can be passed using a custom field named "readingtime".
+The calculation is automatic; a custom value (in seconds) for a single post can be inserted using a Custom Field named "readingtime".
 
 == Installation ==
 1. Upload `reading_time.php` to the `/wp-content/plugins/` directory

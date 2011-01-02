@@ -32,3 +32,14 @@ The value for speed should be chosen between a span of 150 words per minute (sli
 * Display setting: always / only when the `readingtime` custom tag is set
 * Position setting: above the post / below the post
 
+
+== Changelog ==
+
+= 1.0 =
+Initial version
+
+
+== Upgrade Notice == 
+
+= 1.0 =
+Initial version

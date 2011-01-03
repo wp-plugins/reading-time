@@ -12,6 +12,8 @@ Reading Time shows the estimated reading time and puts an animated progress bar 
 Reading Time shows the estimated reading time of the post. 
 The calculation is automatic; a custom value (in seconds) for a single post can be inserted using a Custom Field named "readingtime".
 
+For more informations: http://www.whiletrue.it/
+
 == Installation ==
 1. Upload `reading_time.php` to the `/wp-content/plugins/` directory
 2. Set your favourite values in the `Settings->Reading Time` menu in Wordpress

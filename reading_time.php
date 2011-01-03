@@ -4,7 +4,7 @@ Plugin Name: Reading Time
 Plugin URI: http://www.whiletrue.it
 Description: Shows the suggested reading time of web content. To use it inside a post, create a custom field named "readingtime" and give it the number of seconds suggested (e.g. 150).
 Author: WhileTrue
-Version: 1.0.0
+Version: 1.1.0
 Author URI: http://www.whiletrue.it
 */
 
@@ -74,7 +74,11 @@ function reading_time ($content) {
 			</script>
 			';
 		
-	return $out.$content;
+	if ($reading_time_options[3]=='below') {
+		return $content.$out;
+	} else {
+		return $out.$content;
+	}
 }
 
 
@@ -85,28 +89,39 @@ function reading_time_options () {
       wp_die( __('You do not have sufficient permissions to access this page.') );
     }
 
-    // variables for the field and option names 
-    $opt_name = 'reading_time_default_time';
-    $hidden_field_name = 'reading_time_submit_hidden';
-    $data_field_name = 'reading_time_default_time';
-
     // See if the user has posted us some information
-    // If they did, this hidden field will be set to 'Y'
-    if( isset($_POST['reading_time_text']) or isset($_POST['reading_time_speed']) or isset($_POST['reading_time_bar_color'])) {
+    if( isset($_POST['reading_time_text']) or isset($_POST['reading_time_speed']) 
+	or isset($_POST['reading_time_bar_color']) or isset($_POST['reading_time_position'])) {
 
         update_option( 'reading_time', 
-			$_POST['reading_time_text'].'|||'.$_POST['reading_time_speed'].'|||'.$_POST['reading_time_bar_color'] );
+			$_POST['reading_time_text'].'|||'.$_POST['reading_time_speed'].'|||'
+			.$_POST['reading_time_bar_color'].'|||'.$_POST['reading_time_position'] );
 
-        // Put an settings updated message on the screen
+		// Put an settings updated message on the screen
 
 ?>
 <div class="updated"><p><strong><?php _e('Settings saved.', 'menu-test' ); ?></strong></p></div>
 <?php
 
-    }
+	}
+	
+	//GET STORED VALUES
+	$option_string = get_option('reading_time');
 
-    // settings form
-	$reading_time_options = explode('|||',get_option('reading_time'));
+	if ($option_string===false) {
+		//OPTION NOT IN DATABASE, SO WE INSERT DEFAULT VALUES
+		add_option('reading_time', 
+			'The estimated reading time for this post is SSSS seconds'.'|||'.'200'.'|||'
+			.'blue'.'|||'.'above');
+		$option_string = get_option('reading_time');
+	}
+
+	$reading_time_options = explode('|||',$option_string);
+
+	$sel_above = ($reading_time_options[3]=='above') ? 'selected="selected"' : '';
+	$sel_below = ($reading_time_options[3]=='below') ? 'selected="selected"' : '';
+
+    // SETTINGS FORM
     ?>
 	
 <div class="wrap">
@@ -114,19 +129,26 @@ function reading_time_options () {
 	<form name="form1" method="post" action="">
 
 	<table>
-	<tr><td valign="top"><?php _e("Text:", 'menu-test' ); ?></td>
+	<tr><td valign="top"><?php _e("Text", 'menu-test' ); ?>:</td>
 	<td><input type="text" name="reading_time_text" value="<?php echo $reading_time_options[0]; ?>" size="100"><br />
 	<?php _e("Use 'SSSS' as a placeholder for seconds, e.g. 'The estimated reading time for this post is SSSS seconds'", 'menu-test' ); ?>
 	<br /></td></tr>
 
-	<tr><td valign="top"><?php _e("Speed:", 'menu-test' ); ?></td>
+	<tr><td valign="top"><?php _e("Speed", 'menu-test' ); ?>:</td>
 	<td><input type="text" name="reading_time_speed" value="<?php echo $reading_time_options[1]; ?>" size="20"><br />
 	<?php _e("E.g. 250 for fast readers, 150 for slow readers", 'menu-test' ); ?>
 	<br /></td></tr>
 
-	<tr><td valign="top"><?php _e("Bar color:", 'menu-test' ); ?></td>
-	<td><input type="text" name="reading_time_bar_color" value="<?php echo $reading_time_options[2]; ?>" size="20"><br/>
+	<tr><td valign="top"><?php _e("Bar color", 'menu-test' ); ?>:</td>
+	<td><input type="text" name="reading_time_bar_color" value="<?php echo $reading_time_options[2]; ?>" size="20"><br />
 	<?php _e("E.g. 'blue', '#006699'", 'menu-test' ); ?>
+	<br /></td></tr>
+
+	<tr><td valign="top"><?php _e("Position", 'menu-test' ); ?>:</td>
+	<td><select name="reading_time_position">
+		<option value="above" <?php echo $sel_above; ?> > <?php _e('above the post', 'menu-test' ); ?></option>
+		<option value="below" <?php echo $sel_below; ?> > <?php _e('below the post', 'menu-test' ); ?></option>
+		</select> 
 	<br /></td></tr>
 
 	</table>

@@ -3,8 +3,8 @@ Contributors: whiletrue
 Donate link: http://www.whiletrue.it/
 Tags: reading time, estimate time, reading, time, word count, post, page
 Requires at least: 2.9+
-Tested up to: 3.1
-Stable tag: 1.2.1
+Tested up to: 3.2.1
+Stable tag: 1.2.2
 
 Reading Time shows the estimated reading time and puts an animated progress bar inside the post. 
 
@@ -23,7 +23,7 @@ For more informations: http://www.whiletrue.it/en/projects/wordpress/17-reading-
 == Frequently Asked Questions ==
 = How is the estimation done? =
 The estimation is based on the "speed" value stored in the settings menu.
-The value for speed should be chosen between a span of 150 words per minute (slightly slower than average) to 250 words per minute (slightly higher than average). 
+The value for speed should be chosen between a span of 150 words per minute (slightly slower than average) to 250 words per minute (slightly higher than average); if not set, a default value of 200 is used.
 
 == Screenshots ==
 1. Sample content with the progress bar almost filled
@@ -34,6 +34,9 @@ The value for speed should be chosen between a span of 150 words per minute (sli
 
 
 == Changelog ==
+
+= 1.2.2 =
+* Default speed set to 200 words per minute
 
 = 1.2.1 =
 * Uninstall bugfix

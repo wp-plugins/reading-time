@@ -4,7 +4,7 @@ Plugin Name: Reading Time
 Plugin URI: http://www.whiletrue.it
 Description: Shows the suggested reading time of web content. To use it inside a post, create a custom field named "readingtime" and give it the number of seconds suggested (e.g. 150).
 Author: WhileTrue
-Version: 1.2.1
+Version: 1.2.2
 Author URI: http://www.whiletrue.it
 */
 
@@ -39,8 +39,13 @@ function reading_time ($content) {
 		// FIRST TRY TO GET ESTIMATED TIME FROM CUSTOM VALUES		
 		$tempo = get_post_custom_values('readingtime');
 		if (!is_numeric($tempo[0])) {
-			// CALCULATE ESTIMATED TIME		
+			// CALCULATE ESTIMATED TIME
+			if (!is_numeric($reading_time_options[1]) or $reading_time_options[1]<=0) {		
+				// DEFAULT VALUE
+				$reading_time_options[1] = 200;
+			}
 			$tempo[0] = round(str_word_count(strip_tags($content))*60/$reading_time_options[1]);
+			
 			if (!is_numeric($tempo[0])) {
 				return $content;
 			}
@@ -149,7 +154,7 @@ function reading_time_options () {
 
 	<tr><td valign="top"><?php _e("Speed", 'menu-test' ); ?>:</td>
 	<td><input type="text" name="reading_time_speed" value="<?php echo absint($reading_time_options[1]); ?>" size="20"><br />
-	<span class="description"><?php _e("E.g. 250 for fast readers, 150 for slow readers", 'menu-test' ); ?></span><br />
+	<span class="description"><?php _e("E.g. 250 for fast readers, 150 for slow readers; the default value is 200", 'menu-test' ); ?></span><br />
 	<br /></td></tr>
 
 	<tr><td valign="top"><?php _e("Progress bar color", 'menu-test' ); ?>:</td>

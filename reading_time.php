@@ -4,7 +4,7 @@ Plugin Name: Reading Time
 Plugin URI: http://www.whiletrue.it
 Description: Shows the suggested reading time of web content. To use it inside a post, create a custom field named "readingtime" and give it the number of seconds suggested (e.g. 150).
 Author: WhileTrue
-Version: 1.2.2
+Version: 1.2.3
 Author URI: http://www.whiletrue.it
 */
 

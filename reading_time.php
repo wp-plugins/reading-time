@@ -4,7 +4,7 @@ Plugin Name: Reading Time
 Plugin URI: http://www.whiletrue.it
 Description: Shows the suggested reading time of web content. To use it inside a post, create a custom field named "readingtime" and give it the number of seconds suggested (e.g. 150).
 Author: WhileTrue
-Version: 1.2.3
+Version: 1.2.4
 Author URI: http://www.whiletrue.it
 */
 
@@ -26,7 +26,6 @@ add_action('admin_menu', 'reading_time_menu');
 function reading_time_menu() {
 	add_options_page('Reading Time Options', 'Reading Time', 'manage_options', 'reading_time_options', 'reading_time_options');
 }
-
 
 
 function reading_time ($content) {
@@ -51,11 +50,13 @@ function reading_time ($content) {
 			}
 		}
 		$default_reading_time = $tempo[0];
+    
+		$shown_reading_time = ($reading_time_options[5]=='yes') ? (int)($default_reading_time/60) : $default_reading_time;
 
 		// COMPOSE TEXT MESSAGE
 		$text = $reading_time_options[0];
 		if ($text=='') $text = 'I think you will spend SSSS seconds reading this post';
-		$text = str_replace('SSSS', $default_reading_time, $text);
+		$text = str_replace('SSSS', $shown_reading_time, $text);
 		
 		$out = '<p>'.stripslashes($text).'</p>';
 		
@@ -108,9 +109,14 @@ function reading_time_options () {
     if( isset($_POST['reading_time_text']) or isset($_POST['reading_time_speed']) 
 	or isset($_POST['reading_time_bar_color']) or isset($_POST['reading_time_position'])) {
 
-        update_option( 'reading_time', 
-			esc_html($_POST['reading_time_text'].'|||'.$_POST['reading_time_speed'].'|||'
-			.$_POST['reading_time_bar_color'].'|||'.$_POST['reading_time_position'].'|||'.$_POST['reading_time_bar_display']));
+      update_option( 'reading_time', 
+			esc_html($_POST['reading_time_text']
+        .'|||'.$_POST['reading_time_speed']
+        .'|||'.$_POST['reading_time_bar_color']
+        .'|||'.$_POST['reading_time_position']
+        .'|||'.$_POST['reading_time_bar_display']
+        .'|||'.$_POST['reading_time_minutes']
+        ));
 
 		// Put an settings updated message on the screen
 
@@ -126,8 +132,13 @@ function reading_time_options () {
 	if ($option_string===false) {
 		//OPTION NOT IN DATABASE, SO WE INSERT DEFAULT VALUES
 		add_option('reading_time', 
-			'The estimated reading time for this post is SSSS seconds'.'|||'.'200'.'|||'
-			.'blue'.'|||'.'above'.'|||'.'yes');
+			'The estimated reading time for this post is SSSS seconds'
+			.'|||'.'200'
+			.'|||'.'blue'
+			.'|||'.'above'
+			.'|||'.'yes'
+			.'|||'.'no'
+			);
 		$option_string = get_option('reading_time');
 	}
 
@@ -138,6 +149,9 @@ function reading_time_options () {
 
 	$sel_bar_yes = ($reading_time_options[4]=='yes') ? 'selected="selected"' : '';
 	$sel_bar_no  = ($reading_time_options[4]=='no')  ? 'selected="selected"' : '';
+
+	$sel_minutes_yes = ($reading_time_options[5]=='yes') ? 'selected="selected"' : '';
+	$sel_minutes_no  = ($reading_time_options[5]=='no')  ? 'selected="selected"' : '';
 
     // SETTINGS FORM
     ?>
@@ -174,6 +188,14 @@ function reading_time_options () {
 		<option value="yes" <?php echo $sel_bar_yes; ?> > <?php _e('yes', 'menu-test' ); ?></option>
 		<option value="no"  <?php echo $sel_bar_no; ?> > <?php _e('no',  'menu-test' ); ?></option>
 		</select><br /> 
+	<br /></td></tr>
+
+	<tr><td valign="top"><?php _e("Show minutes instead of seconds", 'menu-test' ); ?>:</td>
+	<td><select name="reading_time_minutes">
+		<option value="yes" <?php echo $sel_minutes_yes; ?> > <?php _e('yes', 'menu-test' ); ?></option>
+		<option value="no"  <?php echo $sel_minutes_no; ?> > <?php _e('no',  'menu-test' ); ?></option>
+		</select> 
+		<span class="description">If active, remember to change the text accordingly (e.g. "... SSSS minutes" instead of "... SSSS seconds")</span><br /> 
 	<br /></td></tr>
 	</table>
 	<hr />

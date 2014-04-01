@@ -9,8 +9,8 @@ Stable tag: 1.2.6
 Reading Time shows the estimated reading time and puts an animated progress bar inside the post. 
 
 == Description ==
-Reading Time shows the estimated reading time of the post. 
-The estimate is automatic; a custom value (in seconds) for a single post can be inserted using a Custom Field named "readingtime".
+Reading Time shows the estimated reading time of the post, in seconds or minutes. 
+The estimate is automatic; a custom value for a single post can be inserted using a Custom Field named "readingtime".
 
 For more info: http://www.whiletrue.it/reading-time-for-wordpress/
 

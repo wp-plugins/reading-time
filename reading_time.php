@@ -4,7 +4,7 @@ Plugin Name: Reading Time
 Plugin URI: http://www.whiletrue.it
 Description: Shows the suggested reading time of web content. To use it inside a post, create a custom field named "readingtime" and give it the number of seconds suggested (e.g. 150).
 Author: WhileTrue
-Version: 1.2.5
+Version: 1.2.6
 Author URI: http://www.whiletrue.it
 */
 
@@ -199,6 +199,15 @@ function reading_time_options () {
 	<br /></td></tr>
 	</table>
 	<hr />
+
+  <p style="font-weight:bold;">
+    <?php _e('Do you like it? I\'m supporting it, please support me!', 'rstw') ?><br />
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=giu%40formikaio%2eit&item_name=WhileTrue&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted" target="_blank">
+ 			<img alt="PayPal - The safer, easier way to pay online!" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" > 
+    </a>
+  </p>
+	<hr />
+  
 	<p class="submit">
 		<input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save Changes') ?>" />
 	</p>

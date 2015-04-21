@@ -3,8 +3,8 @@ Contributors: whiletrue
 Donate link: http://www.whiletrue.it/
 Tags: reading time, estimate time, reading, time, word count, post, page
 Requires at least: 2.9+
-Tested up to: 4.1
-Stable tag: 1.2.8
+Tested up to: 4.2
+Stable tag: 1.2.9
 
 Reading Time shows the estimated reading time and puts an animated progress bar inside the post. 
 
@@ -34,6 +34,9 @@ The value for speed should be chosen between a span of 150 words per minute (sli
 
 
 == Changelog ==
+
+= 1.2.9 =
+* Plugin tested up WordPress 4.2
 
 = 1.2.8 =
 * Plugin tested up WordPress 4.1
